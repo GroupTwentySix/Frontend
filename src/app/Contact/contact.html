@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Vitality Skincare</title>
+    <link rel="stylesheet" href="contactpage.css">
+</head>
+<body>
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p class="contact-info">
+                Our customer service team is available via email Monday - Friday, 9AM - 5PM GMT excluding holidays. 
+                Send us an email at VitalitySkincare@gmail.com. 
+                We generally respond to all inquiries within 5-7 business days.
+            </p>
+            <h2 class="form-title">Contact Form</h2> 
+
+            <!-- Form -->
+            <form action="#" method="POST" class="contact-form">
+                <div class="form-row">
+                    <input type="text" id="first-name" name="first_name" placeholder="First Name" required>
+                    <input type="text" id="last-name" name="last_name" placeholder="Last Name" required>
+                </div>
+                <div class="form-row">
+                    <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-row">
+                    <input type="text" id="order-number" name="order_number" placeholder="Order Number" required>
+                    <div class="select-container">
+                        <select id="question-about" name="question_about" required class="pink-background">
+                            <option value="" disabled selected>My Question is About...</option>
+                            <option value="product">Product Inquiry</option>
+                            <option value="order">Order Status</option>
+                            <option value="support">Technical Support</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <textarea id="comments" name="comments" rows="4" maxlength="1000" placeholder="Your Comments (max 1000 characters)" required></textarea>
+                </div>
+                <div class="form-row">
+                    <button type="submit" class="submit-button">Submit</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
