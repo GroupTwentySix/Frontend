@@ -1,0 +1,180 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Crimson Text', Helvetica, sans-serif;
+    background-color: white;
+    color: #585858;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    display: flex; /* Flexbox layout for horizontal alignment */
+    justify-content: space-between; /* Ensures proper spacing between logo, nav, and icons */
+    align-items: center; /* Vertically aligns items in the nav-bar */
+    background-color: white;
+    padding: 15px 30px 5px;
+    border-bottom: 15px solid #FCF4F4;
+}
+
+.logo {
+    font-size: 24px;
+    color: black;
+    text-align: left;
+    flex: 1; /* Keeps the logo anchored on the left */
+}
+
+.nav {
+    display: flex; /* Aligns nav items horizontally */
+    gap: 2rem; /* Adds spacing between nav items */
+    justify-content: center; /* Centers the nav items */
+    flex: 2; /* Ensures the nav stays in the middle section */
+}
+
+.nav a {
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.icons {
+    display: flex; /* Aligns icons horizontally */
+    gap: 1rem; /* Adds spacing between icons */
+    justify-content: flex-end; /* Keeps icons aligned to the right */
+    flex: 1; /* Ensures the icons section stays on the right */
+}
+
+.icons a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: black;
+    cursor: pointer;
+}
+
+.nav a:hover {
+    color: #585858;
+}
+
+/* Wishlist Section */
+.wishlist-main {
+    width: 70%;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.wishlist-header {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: left; /* Aligns the header to the left */
+}
+
+.wishlist-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.wishlist-image {
+    width: 100px;
+    height: 100px;
+    background-color:#E6EAE4;
+    border-radius: 5px;
+}
+
+.wishlist-details {
+    flex: 1;
+    padding-left: 1rem;
+    text-align: left;
+}
+
+.wishlist-details h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.wishlist-details p {
+    margin-bottom: 0.3rem;
+    color: #767676;
+}
+
+.wishlist-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wishlist-actions button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    background-color: #F5E9E9;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.wishlist-actions button:hover {
+    background-color: #E3E7E0;
+}
+
+/* Footer */
+.footer {
+    background-color: #E3E7E0;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.footer-content p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #585858;
+}
+
+.footer form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.footer form input {
+    padding: 0.5rem;
+    width: 60%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.footer form button {
+    padding: 0.5rem 1rem;
+    background-color: #F5E9E9;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.footer form button:hover {
+    background-color: #E3E7E0;
+}
+
+.iconCart {
+    width: 31px;
+    height: 31px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.iconCart:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
