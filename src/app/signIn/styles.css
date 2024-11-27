@@ -1,4 +1,3 @@
-/* General reset */
 * {
     margin: 0;
     padding: 0;
@@ -26,9 +25,9 @@ header .navbar .logo {
 }
 
 .navbar nav {
-    flex: 1; /* Let the nav section take up remaining space */
+    flex: 1; 
     display: flex;
-    justify-content: center; /* Center the links horizontally */
+    justify-content: center; 
 }
 
 header .navbar nav a {
@@ -44,35 +43,35 @@ header .navbar .icons a img {
 
 .pink-banner {
     height: 5px;
-    background-color: #f7d9d9; /* Light pink color */
+    background-color: #f7d9d9; 
     width: 100%;
 }
 
 
-/* Main Content */
+
 .auth-container {
     display: flex;
     justify-content: space-between;
     margin: 40px auto;
-    padding: 40px; /* Increased padding for better spacing */
-    max-width: 1000px; /* Adjusted width */
+    padding: 40px; 
+    max-width: 1000px; 
     border: 1px solid #ddd;
     border-radius: 8px;
     background: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .auth-container .signin-section,
 .auth-container .signup-section {
     flex: 1;
     text-align: center;
-    padding: 20px; /* Increased internal padding for spacing */
+    padding: 20px; 
 }
 
 .auth-container h2 {
-    margin-bottom: 30px; /* More space below headings */
+    margin-bottom: 30px; 
     color: #555;
-    font-size: 24px; /* Larger font size */
+    font-size: 24px; 
 }
 
 .auth-container form {
@@ -88,7 +87,7 @@ header .navbar .icons a img {
 }
 
 .auth-container button {
-    padding: 15px; /* Larger button */
+    padding: 15px; 
     border: none;
     border-radius: 5px;
     background: #d5ddd2;
@@ -99,7 +98,7 @@ header .navbar .icons a img {
 }
 
 .auth-container button:hover {
-    background: #c2cfbf; /* Slightly darker green on hover */
+    background: #c2cfbf; 
 }
 
 .auth-container .divider {
@@ -110,17 +109,17 @@ header .navbar .icons a img {
 }
 
 .auth-container .signup-section button {
-    width: 80%; /* Make the button wider */
+    width: 80%; 
     padding: 15px;
     font-size: 16px;
 }
 
-/* Footer */
+
 footer {
-    background-color: #eaeae4; /* Light greenish-gray background */
+    background-color: #eaeae4; 
     padding: 20px 40px;
     font-family: Arial, sans-serif;
-    color: #333; /* Dark text for readability */
+    color: #333; 
     font-size: 14px;
 }
 
@@ -161,7 +160,7 @@ footer {
 }
 
 .footer-top .newsletter button {
-    background-color: #f4d7d3; /* Soft pink */
+    background-color: #f4d7d3; 
     color: #333;
     padding: 10px 15px;
     border: none;
@@ -171,7 +170,7 @@ footer {
 }
 
 .footer-top .newsletter button:hover {
-    background-color: #e4c1bd; /* Slightly darker pink on hover */
+    background-color: #e4c1bd; 
 }
 
 hr {
@@ -232,68 +231,71 @@ hr {
     text-decoration: underline;
 }
 
-/* FAQ Section */
-main {
-    padding: 40px;
-}
-
-.faq-heading {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.faq-categories {
+.auth-container {
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.faq-categories button {
-    background-color: transparent;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+    padding: 40px;
+    max-width: 500px;
     border: 1px solid #ddd;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 5px;
-    text-transform: uppercase;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.faq-categories button:hover {
-    background-color: #f4f4f4;
+.auth-container h2 {
+    margin-bottom: 30px;
+    color: #555;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
 }
 
-.faq-section {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.faq-item {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-}
-
-.faq-question {
-    background-color: transparent;
-    border: none;
-    color: #333;
-    padding: 10px 0;
-    font-size: 16px;
-    text-align: left;
+.auth-container form {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.auth-container input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.auth-container button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #d5ddd2;
+    color: #555;
+    font-size: 16px;
     cursor: pointer;
+    transition: 0.3s ease;
     font-weight: bold;
 }
 
-.faq-answer {
-    display: none;
-    padding-top: 5px;
-    color: #555;
-    font-size: 14px;
+.auth-container button:hover {
+    background: #c2cfbf;
 }
 
-.faq-answer p {
-    margin: 0;
+/* Code Inputs */
+.code-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.code-box {
+    width: 50px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+    color: #555;
 }
