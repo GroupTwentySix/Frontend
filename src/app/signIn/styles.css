@@ -1,0 +1,299 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.5;
+}
+
+header .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #fff;
+}
+
+header .navbar .logo {
+    flex-shrink: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar nav {
+    flex: 1; /* Let the nav section take up remaining space */
+    display: flex;
+    justify-content: center; /* Center the links horizontally */
+}
+
+header .navbar nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+header .navbar .icons a img {
+    width: 20px;
+    margin: 0 10px;
+}
+
+.pink-banner {
+    height: 5px;
+    background-color: #f7d9d9; /* Light pink color */
+    width: 100%;
+}
+
+
+/* Main Content */
+.auth-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px auto;
+    padding: 40px; /* Increased padding for better spacing */
+    max-width: 1000px; /* Adjusted width */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.auth-container .signin-section,
+.auth-container .signup-section {
+    flex: 1;
+    text-align: center;
+    padding: 20px; /* Increased internal padding for spacing */
+}
+
+.auth-container h2 {
+    margin-bottom: 30px; /* More space below headings */
+    color: #555;
+    font-size: 24px; /* Larger font size */
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.auth-container button {
+    padding: 15px; /* Larger button */
+    border: none;
+    border-radius: 5px;
+    background: #d5ddd2;
+    color: #555;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.auth-container button:hover {
+    background: #c2cfbf; /* Slightly darker green on hover */
+}
+
+.auth-container .divider {
+    width: 1px;
+    background: #ccc;
+    height: auto;
+    margin: 0 20px;
+}
+
+.auth-container .signup-section button {
+    width: 80%; /* Make the button wider */
+    padding: 15px;
+    font-size: 16px;
+}
+
+/* Footer */
+footer {
+    background-color: #eaeae4; /* Light greenish-gray background */
+    padding: 20px 40px;
+    font-family: Arial, sans-serif;
+    color: #333; /* Dark text for readability */
+    font-size: 14px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.footer-top p {
+    flex: 2;
+    line-height: 1.6;
+}
+
+.footer-top .newsletter {
+    flex: 1;
+    text-align: right;
+}
+
+.footer-top .newsletter h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.footer-top .newsletter form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-top .newsletter input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.footer-top .newsletter button {
+    background-color: #f4d7d3; /* Soft pink */
+    color: #333;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.footer-top .newsletter button:hover {
+    background-color: #e4c1bd; /* Slightly darker pink on hover */
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 40px;
+}
+
+.footer-links .column {
+    flex: 1;
+}
+
+.footer-links h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-note {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+}
+
+.footer-note a {
+    color: #333;
+    text-decoration: none;
+}
+
+.footer-note a:hover {
+    text-decoration: underline;
+}
+
+/* FAQ Section */
+main {
+    padding: 40px;
+}
+
+.faq-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.faq-categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.faq-categories button {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+
+.faq-categories button:hover {
+    background-color: #f4f4f4;
+}
+
+.faq-section {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.faq-question {
+    background-color: transparent;
+    border: none;
+    color: #333;
+    padding: 10px 0;
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.faq-answer {
+    display: none;
+    padding-top: 5px;
+    color: #555;
+    font-size: 14px;
+}
+
+.faq-answer p {
+    margin: 0;
+}
