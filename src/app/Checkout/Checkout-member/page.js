@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link"; // Importing Link from next/link
-import IconSearch from "../../components/header/iconSearch"; // Ensure this file exists or adjust the import path
-import IconCart from "../../components/header/iconCart"; // Ensure this file exists or adjust the import path
+import IconSearch from "../../components/header/iconSearch"; 
+import IconCart from "../../components/header/iconCart"; 
 
 export default function MemberCheckout() {
   const [shippingMethod, setShippingMethod] = useState("free");
@@ -17,7 +17,7 @@ export default function MemberCheckout() {
     { name: "Hydrating toner", price: 20, quantity: 1 }
   ]);
 
-  // Discount logic (for demo purposes, let's assume "DISCOUNT10" gives 10% off)
+  // Discount logic (for demo purposes)
   const applyDiscount = (code) => {
     if (code === "DISCOUNT10") {
       return 0.1; // 10% discount
