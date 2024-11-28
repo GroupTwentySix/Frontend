@@ -21,7 +21,7 @@ export default function Section3 () {
                 <p className={styles.lastp}>
                 Caring for our skin should never come at the cost of our planet. That’s why we are committed to using only the kindest, most natural ingredients—without harsh chemicals—to ensure you can nurture yourself while protecting the Earth. 
                 </p>
-                <Link href="/aboutus">
+                <Link href="/aboutUs">
                 <button className={styles.sec3Button}>Read more</button>
                 </Link>
             </div>
