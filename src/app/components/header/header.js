@@ -135,7 +135,7 @@ const Header = () => {
                    </button>
                 </Link>
 
-                <Link href="/profile">
+                <Link href="/signIn">
                   <button className={styles.iconButton}>
                   <IconProfile className={styles.iconProfile}/>
                    </button>
