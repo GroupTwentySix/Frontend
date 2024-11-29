@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./forgotPassword.module.css";
 import Link from "next/link"; 
 import Header from '../components/header/header';
+import Footer from '../components/footer'
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -86,6 +87,7 @@ export default function ForgotPassword() {
             </form>
           </div>
         </main>
+        <Footer />
       </>
     );
   }

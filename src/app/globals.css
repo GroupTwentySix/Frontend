@@ -20,6 +20,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Crimson Text', Helvetica, sans-serif;
+
 }
 
 @layer utilities {
@@ -27,3 +28,5 @@ body {
     text-wrap: balance;
   }
 }
+
+

@@ -5,15 +5,17 @@ import Header from '../components/header/header'
 import React from 'react';
 import Link from 'next/link';
 import styles from './aboutUs.module.css';
+import Footer from '../components/footer';
 
 
 export default function AboutUs() {
 
     return (
-    
-    <main>
+        <>
+   
+    <main className={styles.main}>
 
-<Header/>
+    <Header/>
 
 
 
@@ -91,5 +93,9 @@ export default function AboutUs() {
             </section>
 
     </main>
+    
+    <Footer />
+    </>
+    
     )
 }

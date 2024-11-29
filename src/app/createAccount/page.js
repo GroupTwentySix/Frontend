@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styles from "./createAccount.module.css"; 
 import Link from "next/link"; 
 import Header from '../components/header/header'
-
+import Footer from '../components/footer'
 export default function CreateAccount() {
 
     {/*copied and pasted Lindsays code from her folder to avoid conflicted file.*/}
@@ -109,6 +109,7 @@ export default function CreateAccount() {
                 </form>
             </div>
         </main>
+        <Footer />
      </>
     );
 }
