@@ -108,7 +108,7 @@ const Header = () => {
                             )}
                         </li>
                         <li className={styles.menuItem}><Link href="/aboutUs">About Us</Link></li>
-                        <li className={styles.menuItem}><Link href="/contact">Contact</Link></li>
+                        <li className={styles.menuItem}><Link href="/Contact">Contact</Link></li>
                         <li className={styles.menuItem}><Link href="/quiz">Quiz</Link></li>
                     </ul>
                 </nav>
