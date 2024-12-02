@@ -9,6 +9,7 @@ import IconWishlist from './iconWishlist'
 import IconProfile from './iconProfile'
 
 
+
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownHovered, setIsDropdownHovered] = useState(false);
@@ -44,7 +45,9 @@ const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.left}>
-                <h1 className={styles.logo}>Vitality</h1>
+            <Link href="/">
+                    <h1 className={styles.logo}>Vitality</h1>
+                </Link>
             </div>
 
             <div className={styles.middle}>
@@ -104,19 +107,40 @@ const Header = () => {
                                 </div>
                             )}
                         </li>
-                        <li className={styles.menuItem}><Link href="/about">About Us</Link></li>
-                        <li className={styles.menuItem}><Link href="/contact">Contact</Link></li>
+                        <li className={styles.menuItem}><Link href="/aboutUs">About Us</Link></li>
+                        <li className={styles.menuItem}><Link href="/Contact">Contact</Link></li>
                         <li className={styles.menuItem}><Link href="/quiz">Quiz</Link></li>
                     </ul>
                 </nav>
             </div>
 
-            {/*Create the links to the pages for the icons */}
+            
             <div className={styles.right}>
-                <IconSearch className={styles.iconSearch}/>
-                <IconCart className={styles.iconCart}/>
-                <IconWishlist className={styles.iconWishlist}/>
-                <IconProfile className={styles.iconProfile}/>
+
+                <Link href="/search">
+                  <button className={styles.iconButton}>
+                    <IconSearch className={styles.iconSearch}/>
+                   </button>
+                </Link>
+
+                <Link href="/cart">
+                  <button className={styles.iconButton}>
+                  <IconCart className={styles.iconCart}/>
+                   </button>
+                </Link>
+
+                <Link href="/wishlist">
+                  <button className={styles.iconButton}>
+                  <IconWishlist className={styles.iconWishlist}/>
+                   </button>
+                </Link>
+
+                <Link href="/signIn">
+                  <button className={styles.iconButton}>
+                  <IconProfile className={styles.iconProfile}/>
+                   </button>
+                </Link>
+
             </div>
 
         </header>

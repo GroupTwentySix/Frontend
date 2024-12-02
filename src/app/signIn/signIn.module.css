@@ -1,0 +1,98 @@
+/*Copied lindsay code to avoid file error with merging */
+
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 165px;
+}
+
+
+.authContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 900px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+.signinSection,
+.signupSection {
+    flex: 1;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.signinSection {
+    background-color: #f9f9f9;
+}
+
+.signupSection {
+    background-color: #f9f9f9;
+}
+
+
+.divider {
+    width: 1px;
+    background: #ddd;
+}
+
+
+.authContainer h2 {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.authContainer form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.authContainer input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.authContainer button {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #d5ddd2;
+    color: #555;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.authContainer button:hover {
+    background: #c2cfbf;
+}
+
+/* Forgot Password Link */
+.forgotPassword {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #a87878;
+    text-decoration: none;
+}
+
+.forgotPassword:hover {
+    text-decoration: underline;
+}

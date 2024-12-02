@@ -1,0 +1,65 @@
+.sectionContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+    padding-top: 0px;
+    background-color: white;
+}
+
+.left {
+    flex: 1;
+    background-color: #E3E7E0;
+    padding: 0px;
+    width: 50%;
+    max-width: 640px;
+    display: flex;
+}
+
+.right {
+    padding: 50px;
+    padding-top: 70px;
+    width: 50%;
+    max-width: 640px;
+    flex: 1;
+    background-color: #F8FBF6;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.right P{
+font-size: 17px;
+color: #656565;
+margin-top: 20px;
+
+
+}
+
+.right h1 {
+font-size: 24px;
+font-weight: 0px;
+}
+
+.left img {
+  
+}
+
+
+.lastp {
+    padding-bottom: 20px;
+}
+
+.sec3Button {
+    position: absolute;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sec3Button:hover {
+    background-color: #F5E9E9;
+    color: black;
+}

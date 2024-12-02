@@ -1,0 +1,149 @@
+.main {
+    padding-bottom: 10px;
+}
+
+.aboutus {
+    display:grid;
+    background-color: #E6EAE4;
+    color: #585858;
+    padding: 50px 20px;
+    margin: 50px auto; 
+    width: 90%;
+    height: 20vh;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+}
+
+.firstContainer, .secondContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 0px;
+    font-size: 17px;
+    color: #585858;
+}
+
+
+.firstLeft {
+    flex: 1;
+    padding: 60px;
+    text-align: left;
+}
+
+.firstLeft h2 {
+    font-size: 24px;
+    color: #a87878;
+}
+
+
+.firstRight {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 60px;
+    
+    
+}
+
+.firstRight img {
+    width: 400px;
+    border-radius: 10px;
+}
+
+
+
+
+.secondLeft {
+    flex: 1;
+    padding: 60px;
+
+
+}
+
+.secondLeft img {
+    width: 400px;
+    border-radius: 10px;
+}
+
+
+.secondRight {
+    flex: 1;
+    text-align: left;
+    justify-content: flex-end;
+    padding-right: 60px;
+}
+
+.secondRight h2 {
+    font-size: 24px;
+    color: #a87878;
+}
+
+
+
+
+
+.right {
+   padding-left: 340px;
+}
+
+
+
+.right img {
+    width: 400px;
+    height: 300px;
+
+}
+
+.left img {
+    width: 400px;
+    height: 300px;
+    
+}
+
+.centeringContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+}
+
+.quoteBar {
+    display:grid;
+    background-color: #E6EAE4;
+    color: #585858;
+    padding: 30px 40px;
+    border-radius: 15px;
+    width: 60%;
+
+    text-align: center;
+    font-size: 18px;
+}
+
+.quoteBar h4 {
+    font-size: 20px;
+}
+
+
+@media (max-width: 1024px) {
+    .firstContainer, .secondContainer {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .firstLeft, .secondRight, .firstRight, .secondLeft {
+        padding: 20px;
+    }
+
+    .firstRight img, .secondLeft img {
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .quoteBar {
+        width: 80%;
+    }
+}

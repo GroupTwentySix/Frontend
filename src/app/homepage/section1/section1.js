@@ -70,4 +70,4 @@ export default function Section1() {
 
 }
 
-/* section 1 features product advertisment slideshow*/
+/* section 1 shows a product advertisment slideshow and a button to shop products*/

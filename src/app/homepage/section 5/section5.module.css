@@ -1,0 +1,171 @@
+.sectionContainer {
+
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    padding-top: 30px;
+}
+
+
+
+.left {
+    flex:1 ;
+    background-color: #E3E7E0;
+    padding: 50px;
+    width: 30%;
+}
+
+
+.right {
+    flex: 2;
+    background-color: #F8FBF6;
+    flex-direction: row;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 50px;
+    
+
+
+}
+
+
+.heading1 {
+    font-size: 24px;
+
+}
+
+
+.heading2 {
+    font-size: 20px;
+    font-style: italic;
+    padding-bottom: 20px;
+
+}
+
+
+.left p {
+    font-size: 17px;
+    color: #656565;
+
+}
+
+.p1 {
+    padding-bottom: 5px;
+}
+
+.p2 {
+    padding-bottom: 25px;
+}
+
+.left button {
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+
+.left button:hover {
+    background-color: #F5E9E9;
+    color: black;
+
+}
+
+
+.mini {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    flex: 1 1 auto;
+    min-width: 100px;
+    max-width: 200px;
+    
+    
+
+}
+
+
+.steps {
+    font-size: 18px;
+    
+
+}
+
+
+.stepsImage {
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+    
+    
+
+   
+
+}
+
+
+
+.stepsButton {
+    
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.stepsButton:hover {
+
+    background-color: #F5E9E9;
+    color: black;
+}
+
+.product {
+    color: #a87878;
+}
+
+
+@media (max-width: 800px) {
+    .sectionContainer {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .heading1 {
+        font-size: 20px;
+    }
+
+    .heading2 {
+        font-size: 18px;
+    }
+
+    .left p {
+        font-size: 15px;
+    } 
+
+    .mini {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .stepsImage {
+        width: 150px;
+        height: 150px;
+    }
+}
