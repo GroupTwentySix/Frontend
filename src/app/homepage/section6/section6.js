@@ -50,7 +50,7 @@ import Link from 'next/Link';
 
     return (
 
-        <div>
+        <div className={styles.main}>
             <h1 className={styles.secName}>What our customers say</h1>
             <h3 className={styles.secName2}>Verified Vitality Customers</h3>
             <section className={styles.reviews}>

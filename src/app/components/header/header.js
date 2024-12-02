@@ -108,18 +108,39 @@ const Header = () => {
                             )}
                         </li>
                         <li className={styles.menuItem}><Link href="/aboutUs">About Us</Link></li>
-                        <li className={styles.menuItem}><Link href="/contact">Contact</Link></li>
+                        <li className={styles.menuItem}><Link href="/Contact">Contact</Link></li>
                         <li className={styles.menuItem}><Link href="/quiz">Quiz</Link></li>
                     </ul>
                 </nav>
             </div>
 
-            {/*Create the links to the pages for the icons */}
+            
             <div className={styles.right}>
-                <IconSearch className={styles.iconSearch}/>
-                <IconCart className={styles.iconCart}/>
-                <IconWishlist className={styles.iconWishlist}/>
-                <IconProfile className={styles.iconProfile}/>
+
+                <Link href="/search">
+                  <button className={styles.iconButton}>
+                    <IconSearch className={styles.iconSearch}/>
+                   </button>
+                </Link>
+
+                <Link href="/cart">
+                  <button className={styles.iconButton}>
+                  <IconCart className={styles.iconCart}/>
+                   </button>
+                </Link>
+
+                <Link href="/wishlist">
+                  <button className={styles.iconButton}>
+                  <IconWishlist className={styles.iconWishlist}/>
+                   </button>
+                </Link>
+
+                <Link href="/signIn">
+                  <button className={styles.iconButton}>
+                  <IconProfile className={styles.iconProfile}/>
+                   </button>
+                </Link>
+
             </div>
 
         </header>
