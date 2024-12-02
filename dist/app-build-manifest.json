@@ -12,11 +12,16 @@
       "static/css/app/Checkout/Checkout-member/page.css",
       "static/chunks/app/Checkout/Checkout-member/page.js"
     ],
-    "/Checkout/Checkout-guest/page": [
+    "/Product-list/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/Checkout/Checkout-guest/page.css",
-      "static/chunks/app/Checkout/Checkout-guest/page.js"
+      "static/css/app/Product-list/page.css",
+      "static/chunks/app/Product-list/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
