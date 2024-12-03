@@ -1,276 +1,309 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
-import Link from "next/link"; // Importing Link from next/link
-import IconSearch from "../../components/header/iconSearch"; 
-import IconCart from "../../components/header/iconCart"; 
+import styles from "./MemberCheckout.module.css";
+import Header from "../../components/header/header";
+import Footer from "../../components/footer";
 
 export default function MemberCheckout() {
   const [shippingMethod, setShippingMethod] = useState("free");
   const [discountCode, setDiscountCode] = useState("");
-  const [isDiscountApplied, setIsDiscountApplied] = useState(false); // New state to track if discount is applied
-  const [discount, setDiscount] = useState(0); // New state for discount
+  const [isDiscountApplied, setIsDiscountApplied] = useState(false);
+  const [discount, setDiscount] = useState(0);
+  const [items, setItems] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
+  const [shippingAddress, setShippingAddress] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    postcode: "",
+  });
+  const [billingAddress, setBillingAddress] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    postcode: "",
+  });
 
-  const [items] = useState([
-    { name: "Hyaluronic acid serum", price: 10, quantity: 1 },
-    { name: "Daily SPF 50+", price: 10, quantity: 1 },
-    { name: "Hydrating toner", price: 20, quantity: 1 }
-  ]);
+  // Simulate fetching cart items from a database
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      setItems([
+        { id: 1, name: "Hyaluronic Acid Serum", price: 10, quantity: 1, image: "/images/faceImage1.jpg" },
+        { id: 2, name: "Daily SPF 50+", price: 10, quantity: 1, image: "/images/step1.jpeg" },
+        { id: 3, name: "Hydrating Toner", price: 20, quantity: 1, image: "/images/step2.jpeg" },
+      ]);
+    };
+    fetchCartItems();
+  }, []);
 
-  // Discount logic (for demo purposes)
   const applyDiscount = (code) => {
     if (code === "DISCOUNT10") {
-      return 0.1; // 10% discount
+      return 0.1;
     }
     return 0;
   };
 
-  // Calculate the subtotal
   const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
-
-  // Recalculate the discount only when the apply button is clicked
-  const handleApplyDiscount = () => {
-    const newDiscount = applyDiscount(discountCode);
-    setDiscount(subtotal * newDiscount); // Apply discount to the subtotal
-    setIsDiscountApplied(true); // Mark the discount as applied
-  };
-
-  // Calculate shipping price
   const shippingPrice = shippingMethod === "premium" ? 3.99 : 0;
-
-  // Calculate total price
   const totalPrice = subtotal + shippingPrice - discount;
 
+  const handleApplyDiscount = () => {
+    const newDiscount = applyDiscount(discountCode);
+    if (newDiscount > 0) {
+      setDiscount(subtotal * newDiscount);
+      setIsDiscountApplied(true);
+      setErrorMessage("");
+    } else {
+      setErrorMessage("Invalid discount code. Please try again.");
+      setIsDiscountApplied(false);
+    }
+  };
+
+  const handleAddressChange = (e, setAddress) => {
+    const { name, value } = e.target;
+    setAddress((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePayNow = () => {
+    alert("Payment successful!");
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="flex justify-between items-center px-6 py-4 border-b border-gray-300 bg-white">
-        {/* Logo */}
-        <div>
-          <Link href="/">
-            <img
-              src="/images/vitality-logo.png"
-              alt="Vitality Logo"
-              className="h-8 w-auto object-contain"
-            />
-          </Link>
-        </div>
+    <div className={styles.main}>
+      <Header />
+      <div className={styles.container}>
+        {/* Left Section */}
+        <div className={styles.leftSection}>
+          <h2>Member Checkout</h2>
 
-        {/* Navigation */}
-        <div className="flex items-center space-x-4">
-          <IconSearch />
-          <IconCart />
-        </div>
-      </header>
-
-      {/* Content */}
-      <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 py-8 px-4">
-        {/* Left Section - Payment Button */}
-        <section className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold mb-4">Member Checkout</h2>
-
-          {/* Contact */}
-          <div className="mb-6">
-            <h3 className="text-sm font-semibold mb-2">Contact</h3>
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-            />
-            <label className="flex items-center mt-2 text-sm text-gray-500">
-              <input type="checkbox" className="mr-2" /> Sign me up for first access to the latest
-              drops and more.
+          {/* Contact Section */}
+          <div>
+            <h3>Contact</h3>
+            <input type="email" placeholder="Enter your email address" className={styles.input} />
+            <label className={styles.checkboxLabel1}>
+              <input
+                type="checkbox"
+               
+              />{" "}
+              Sign me up for the latest access to drops and all
             </label>
           </div>
 
-          {/* Delivery */}
-          <div className="mb-6">
-            <h3 className="text-sm font-semibold mb-2">Delivery</h3>
-            <div className="grid grid-cols-2 gap-4">
+          {/* Delivery Section */}
+          <div>
+            <h3>Shipping Address</h3>
+            <div className={styles.inputGroup}>
+            <input
+              type="text"
+              placeholder="Country / Region"
+              name="address"
+              value={shippingAddress.address}
+              onChange={(e) => handleAddressChange(e, setShippingAddress)}
+              className={styles.input}
+            />
               <input
                 type="text"
                 placeholder="First name"
-                className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                name="firstName"
+                value={shippingAddress.firstName}
+                onChange={(e) => handleAddressChange(e, setShippingAddress)}
+                className={styles.input}
               />
               <input
                 type="text"
                 placeholder="Last name"
-                className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                name="lastName"
+                value={shippingAddress.lastName}
+                onChange={(e) => handleAddressChange(e, setShippingAddress)}
+                className={styles.input}
               />
             </div>
             <input
               type="text"
               placeholder="Address"
-              className="w-full p-2 mt-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+              name="address"
+              value={shippingAddress.address}
+              onChange={(e) => handleAddressChange(e, setShippingAddress)}
+              className={styles.input}
             />
             <input
               type="text"
-              placeholder="Apartment, suite, etc (Optional)"
-              className="w-full p-2 mt-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+              placeholder="Appartment,Suit,etc(optional)"
+              name="address"
+              value={shippingAddress.address}
+              onChange={(e) => handleAddressChange(e, setShippingAddress)}
+              className={styles.input}
             />
-            <div className="grid grid-cols-2 gap-4 mt-4">
+            <div className={styles.inputGroup}>
               <input
                 type="text"
                 placeholder="City"
-                className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                name="city"
+                value={shippingAddress.city}
+                onChange={(e) => handleAddressChange(e, setShippingAddress)}
+                className={styles.input}
               />
               <input
                 type="text"
                 placeholder="Postcode"
-                className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+                name="postcode"
+                value={shippingAddress.postcode}
+                onChange={(e) => handleAddressChange(e, setShippingAddress)}
+                className={styles.input}
               />
-            </div>
-            <input
-              type="text"
+              <input
+              type="number"
               placeholder="Phone"
-              className="w-full p-2 mt-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
+              name="address"
+              value={shippingAddress.address}
+              onChange={(e) => handleAddressChange(e, setShippingAddress)}
+              className={styles.input}
             />
-            <label className="flex items-center mt-2 text-sm text-gray-500">
-              <input type="checkbox" className="mr-2" /> Text me with news and offers.
+            </div>
+          </div>
+
+          {/* Shipping Method */}
+          <div>
+            <h3>Shipping Method</h3>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                value="free"
+                checked={shippingMethod === "free"}
+                onChange={() => setShippingMethod("free")}
+              />
+              Free Delivery
+            </label>
+            <label className={styles.radioLabel}>
+              <input
+                type="radio"
+                value="premium"
+                checked={shippingMethod === "premium"}
+                onChange={() => setShippingMethod("premium")}
+              />
+              Premium Next-Day Delivery (£3.99)
             </label>
           </div>
 
-          {/* Payment */}
-          <section className="bg-white p-6 rounded-lg mt-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Payment</h2>
-            <label className="flex items-center mb-4 text-sm">
-              <input type="radio" name="payment" className="mr-2" /> Credit or Debit card
-            </label>
-            <input
-              type="text"
-              placeholder="Card number"
-              className="w-full p-2 mb-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-            />
-            <div className="grid grid-cols-2 gap-4">
+          {/* Billing Address Section */}
+          <div>
+            <h3>Billing Address</h3>
+            <label className={styles.checkboxLabel}>
               <input
-                type="text"
-                placeholder="Expiration date (MM/YY)"
-                className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-              />
-              <input
-                type="text"
-                placeholder="Security code"
-                className="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-              />
-            </div>
-            <input
-              type="text"
-              placeholder="Name on card"
-              className="w-full p-2 mt-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-            />
-            <label className="flex items-center mt-2 text-sm text-gray-500">
-              <input type="checkbox" className="mr-2" /> Use shipping address as billing address.
+                type="checkbox"
+                checked={useShippingAsBilling}
+                onChange={() => setUseShippingAsBilling(!useShippingAsBilling)}
+              />{" "}
+              Use shipping address as billing address
             </label>
-            <button className="w-full mt-4 p-2 bg-green-600 text-white font-medium rounded-md">
-              Pay Now
-            </button>
-          </section>
-        </section>
-
-        {/* Right Section - Shipping, Discount, and Summary */}
-        <section className="bg-white p-6 rounded-lg shadow-md">
-          {/* Shipping Method */}
-          <section className="bg-white p-6 rounded-lg border border-gray-300 mt-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Shipping Method</h2>
-
-            <div className="space-y-4">
-              {/* Shipping Method - Free Delivery */}
-              <div className="flex flex-col p-4 border border-gray-300 rounded-lg">
-                <div className="flex items-center mb-2">
+            {!useShippingAsBilling && (
+              <div>
+                <div className={styles.inputGroup}>
                   <input
-                    type="radio"
-                    name="shippingMethod"
-                    id="freeDelivery"
-                    value="free"
-                    checked={shippingMethod === "free"}
-                    onChange={() => setShippingMethod("free")}
-                    className="form-radio h-4 w-4 text-green-600"
+                    type="text"
+                    placeholder="First name"
+                    name="firstName"
+                    value={billingAddress.firstName}
+                    onChange={(e) => handleAddressChange(e, setBillingAddress)}
+                    className={styles.input}
                   />
-                  <label htmlFor="freeDelivery" className="ml-2 text-gray-700">
-                    Free
-                  </label>
-                </div>
-                <p className="text-sm text-gray-500">7 - 14 days</p>
-              </div>
-
-              {/* Shipping Method - Premium Delivery */}
-              <div className="flex flex-col p-4 border border-gray-300 rounded-lg">
-                <div className="flex items-center mb-2">
                   <input
-                    type="radio"
-                    name="shippingMethod"
-                    id="premiumDelivery"
-                    value="premium"
-                    checked={shippingMethod === "premium"}
-                    onChange={() => setShippingMethod("premium")}
-                    className="form-radio h-4 w-4 text-green-600"
+                    type="text"
+                    placeholder="Last name"
+                    name="lastName"
+                    value={billingAddress.lastName}
+                    onChange={(e) => handleAddressChange(e, setBillingAddress)}
+                    className={styles.input}
                   />
-                  <label htmlFor="premiumDelivery" className="ml-2 text-gray-700">
-                    Premium (£3.99)
-                  </label>
                 </div>
-                <p className="text-sm text-gray-500">1 - 3 days</p>
-              </div>
-            </div>
-          </section>
-
-          {/* Discount Code */}
-          <section className="bg-pink-50 p-6 rounded-lg shadow-md mt-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Discount Code or Gift Card</h2>
-            <input
-              type="text"
-              id="discount"
-              placeholder="Enter code"
-              value={discountCode}
-              onChange={(e) => setDiscountCode(e.target.value)}
-              className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-600"
-            />
-            <button
-              onClick={handleApplyDiscount} // Apply discount only when clicked
-              className="w-full mt-2 p-2 bg-gray-800 text-white font-medium rounded-md"
-            >
-              Apply
-            </button>
-          </section>
-
-          {/* Order Summary */}
-          <section className="bg-green-50 p-6 rounded-lg shadow-md mt-6">
-            <h2 className="text-lg font-medium mb-4">Order Summary</h2>
-            <ul className="mb-4">
-              {items.map((item, index) => (
-                <li key={index} className="flex justify-between items-center border-b py-2">
-                  <img
-                    src={`/images/${item.name.toLowerCase().replace(/ /g, "-")}.jpg`} // Assuming image naming follows this convention
-                    alt={item.name}
-                    className="w-10 h-10 rounded-md"
+                <input
+                  type="text"
+                  placeholder="Address"
+                  name="address"
+                  value={billingAddress.address}
+                  onChange={(e) => handleAddressChange(e, setBillingAddress)}
+                  className={styles.input}
+                />
+                <div className={styles.inputGroup}>
+                  <input
+                    type="text"
+                    placeholder="City"
+                    name="city"
+                    value={billingAddress.city}
+                    onChange={(e) => handleAddressChange(e, setBillingAddress)}
+                    className={styles.input}
                   />
-                  <span>{item.name}</span>
-                  <span>£{item.price}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex justify-between items-center mb-4">
-              <span>Subtotal</span>
-              <span>£{(subtotal - discount).toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between items-center mb-4">
-              <span>Shipping</span>
-              <span>{shippingMethod === "premium" ? "£3.99" : "Free"}</span>
-            </div>
-            {discount > 0 && (
-              <div className="flex justify-between items-center mb-4">
-                <span>Discount</span>
-                <span>-£{discount.toFixed(2)}</span>
+                  <input
+                    type="text"
+                    placeholder="Postcode"
+                    name="postcode"
+                    value={billingAddress.postcode}
+                    onChange={(e) => handleAddressChange(e, setBillingAddress)}
+                    className={styles.input}
+                  />
+                </div>
               </div>
             )}
-            <div className="flex justify-between items-center font-semibold text-xl">
-              <span>Total</span>
-              <span>£{totalPrice.toFixed(2)}</span>
+          </div>
+
+          {/* Payment Section */}
+          <div>
+            <h3>Payment</h3>
+            <input type="text" placeholder="Card number" className={styles.input} />
+            <div className={styles.inputGroup}>
+              <input type="text" placeholder="Expiration date (MM/YY)" className={styles.input} />
+              <input type="text" placeholder="Security code" className={styles.input} />
             </div>
-          </section>
-        </section>
-      </main>
+            <input type="text" placeholder="Name on card" className={styles.input} />
+            <button className={styles.button} onClick={handlePayNow}>
+              Pay Now
+            </button>
+          </div>
+        </div>
+
+        {/* Right Section */}
+        <div className={styles.rightSection}>
+          <h2>Order Summary</h2>
+          {items.map((item) => (
+            <div key={item.id} className={styles.summaryItem}>
+              <img src={item.image} alt={item.name} className={styles.productImage} />
+              <span>{item.name}</span>
+              <span>£{item.price * item.quantity}</span>
+            </div>
+          ))}
+          <div className={styles.summaryItem}>
+            <span>Subtotal</span>
+            <span>£{subtotal.toFixed(2)}</span>
+          </div>
+          <div className={styles.summaryItem}>
+            <span>Shipping</span>
+            <span>£{shippingPrice.toFixed(2)}</span>
+          </div>
+          <div className={styles.summaryItem}>
+            <span>Discount</span>
+            <span>-£{discount.toFixed(2)}</span>
+          </div>
+          <div className={styles.summaryTotal}>
+            <span>Total</span>
+            <span>£{totalPrice.toFixed(2)}</span>
+          </div>
+          <input
+            type="text"
+            placeholder="Discount code"
+            value={discountCode}
+            onChange={(e) => setDiscountCode(e.target.value)}
+            className={styles.discountInput}
+          />
+          <button onClick={handleApplyDiscount} className={styles.discountButton}>
+            Apply
+          </button>
+          {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

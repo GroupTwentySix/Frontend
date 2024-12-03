@@ -1,6 +1,6 @@
 "use client";
 
-import Link from 'next/Link';
+import Link from 'next/link';
 import { useState } from 'react'
 import styles from './header.module.css'
 import IconCart from './iconCart'
@@ -46,7 +46,7 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.left}>
             <Link href="/">
-                    <h1 className={styles.logo}>Vitality</h1>
+                <img src="/images/vitality-logo.png" alt="Vitality Logo" className={styles.logo} />
                 </Link>
             </div>
 
@@ -69,14 +69,24 @@ const Header = () => {
                                         <div className={styles.subcategory}>
                                             <h4>Moisturisers</h4>
                                             <ul>
-                                                <li><Link href="/item1">View all Moisturisers</Link></li>
+                                                <li className={styles.viewall}><Link href="/item1">View all Moisturisers</Link></li>
                                             </ul>
+                                            <li><Link href = "">Moisturiser 1</Link></li>
+                                            <li><Link href = "">Moisturiser 2</Link></li>
+                                            <li><Link href = "">Moisturiser 3</Link></li>
+                                            <li><Link href = "">Moisturiser 4</Link></li>
+                                            <li><Link href = "">Moisturiser 5</Link></li>
                                         </div>
 
                                         <div className={styles.subcategory}>
                                             <h4>Cleansers</h4>
                                             <ul>
-                                            <li><Link href="/item2">View all Cleansers</Link></li>
+                                            <li className={styles.viewall}><Link href="/item2">View all Cleansers</Link></li>
+                                            <li><Link href = "">Cleanser 1</Link></li>
+                                            <li><Link href = "">Cleanser 2</Link></li>
+                                            <li><Link href = "">Cleanser 3</Link></li>
+                                            <li><Link href = "">Cleanser 4</Link></li>
+                                            <li><Link href = "">Cleanser 5</Link></li>
                                             </ul>
                                         </div>
 
@@ -85,21 +95,36 @@ const Header = () => {
                                         <div className={styles.subcategory}>
                                             <h4>Serums</h4>
                                             <ul>
-                                            <li><Link href="/item3">View all Serums</Link></li>
+                                            <li className={styles.viewall}><Link href="/item3">View all Serums</Link></li>
+                                            <li><Link href = "">Serum 1</Link></li>
+                                            <li><Link href = "">Serum 2</Link></li>
+                                            <li><Link href = "">Serum 3</Link></li>
+                                            <li><Link href = "">Serum 4</Link></li>
+                                            <li><Link href = "">Serum 5</Link></li>
                                             </ul>
                                         </div>
 
                                         <div className={styles.subcategory}>
                                             <h4>Toner</h4>
                                             <ul>
-                                            <li><Link href="/item4">View all Toners</Link></li>
+                                            <li className={styles.viewall}><Link href="/item4">View all Toners</Link></li>
+                                            <li><Link href = "">Toner 1</Link></li>
+                                            <li><Link href = "">Toner 2</Link></li>
+                                            <li><Link href = "">Toner 3</Link></li>
+                                            <li><Link href = "">Toner 4</Link></li>
+                                            <li><Link href = "">Toner 5</Link></li>
                                             </ul>
                                         </div>
 
                                         <div className={styles.subcategory}>
                                             <h4>SPF</h4>
                                             <ul>
-                                            <li><Link href="/item5">View all SPF</Link></li>
+                                            <li className={styles.viewall}><Link href="/item5">View all SPF</Link></li>
+                                            <li><Link href = "">SDF 1</Link></li>
+                                            <li><Link href = "">SDF 2</Link></li>
+                                            <li><Link href = "">SDF 3</Link></li>
+                                            <li><Link href = "">SDF 4</Link></li>
+                                            <li><Link href = "">SDF 5</Link></li>
                                             </ul>
                                         </div>
 
@@ -117,11 +142,15 @@ const Header = () => {
             
             <div className={styles.right}>
 
-                <Link href="/search">
-                  <button className={styles.iconButton}>
-                    <IconSearch className={styles.iconSearch}/>
-                   </button>
-                </Link>
+                <div className={styles.searchInput}>
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        className={styles.searchField}
+                    />
+                    <IconSearch className={styles.iconSearch} />
+                </div>  
+
 
                 <Link href="/cart">
                   <button className={styles.iconButton}>
