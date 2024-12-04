@@ -35,9 +35,11 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerTop}>
-      <Link href="/">
-                <img src="/images/vitality-logo.png" alt="Vitality Logo" className={styles.logo} />
-                </Link>
+        <p>
+          We are committed to providing quality skincare that keeps to our values and our missions. Making sure to be a
+          green company and remain cruelty-free whilst providing the best customer service is important to us and part of
+          what makes Vitality unique.
+        </p>
 
         <div className={styles.newsletter}>
           <h3 className={styles.newsletterTitle}>Sign up for our newsletter</h3>
@@ -80,15 +82,8 @@ export default function Footer() {
             <Link href="#">About us</Link>
             <Link href="#">Mission statement</Link>
           </div>
-          
-          <div className={styles.aboutParagraph}>
-            <p>
-            We are committed to providing quality skincare that keeps to our values and our missions. Making sure to be a
-            green company and remain cruelty-free whilst providing the best customer service is important to us and part of
-            what makes Vitality unique.
-            </p>
-          </div>
-          </div>
+        </div>
+
         <p className={styles.footerNote}>
           Vitality 2024 &nbsp; | &nbsp; <Link href="#">Terms of use</Link> &nbsp; | &nbsp;{" "}
           <Link href="#">Privacy</Link>
