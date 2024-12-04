@@ -1,0 +1,118 @@
+/* faq.module.css (Scoped Styles) */
+.faqContainer {
+    width: 100%;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.faqTitle {
+    font-family: 'Italiana', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    margin: 30px 0;
+}
+
+.faqSection {
+    margin-bottom: 20px;
+}
+
+.faqBoxContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.faqBox {
+    padding: 12px 16px;
+    border: 2px solid #d3d3d3;
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #fff;
+    transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.faqBox:hover {
+    background-color: #f4f4f4;
+    transform: scale(1.05);
+    border-color: #a9a9a9;
+}
+
+/* FAQ Content */
+.faqContentContainer {
+    margin-top: 20px;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.faqContent {
+    display: none;
+}
+
+/* Show the relevant FAQ content when radio button is checked */
+input[name="faq-category"]:checked ~ .faqContentContainer .faqContent {
+    display: block;
+}
+
+.faqItem {
+    margin-bottom: 15px;
+}
+
+.faqQuestion {
+    font-family: 'Lexend', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    padding: 12px 20px;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid #d3d3d3;
+    padding-bottom: 12px;
+}
+
+.faqAnswer {
+    font-family: 'Kantumruy Pro', sans-serif;
+    font-size: 16px;
+    color: #777;
+    margin-top: 12px;
+    padding: 12px 20px;
+    width: 100%;
+}
+
+.faqQuestion:focus {
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .faqBoxContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .faqBox {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .faqContentContainer {
+        padding: 0 10px;
+    }
+
+    .faqItem {
+        width: 100%;
+    }
+}
