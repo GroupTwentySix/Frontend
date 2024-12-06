@@ -69,7 +69,7 @@ const Header = () => {
                                         <div className={styles.subcategory}>
                                             <h4>Moisturisers</h4>
                                             <ul>
-                                                <li className={styles.viewall}><Link href="/item1">View all Moisturisers</Link></li>
+                                                <li className={styles.viewall}><Link href="/products">View all Moisturisers</Link></li>
                                             </ul>
                                             <li><Link href = "">Moisturiser 1</Link></li>
                                             <li><Link href = "">Moisturiser 2</Link></li>
@@ -81,7 +81,7 @@ const Header = () => {
                                         <div className={styles.subcategory}>
                                             <h4>Cleansers</h4>
                                             <ul>
-                                            <li className={styles.viewall}><Link href="/item2">View all Cleansers</Link></li>
+                                            <li className={styles.viewall}><Link href="/products">View all Cleansers</Link></li>
                                             <li><Link href = "">Cleanser 1</Link></li>
                                             <li><Link href = "">Cleanser 2</Link></li>
                                             <li><Link href = "">Cleanser 3</Link></li>
@@ -95,7 +95,7 @@ const Header = () => {
                                         <div className={styles.subcategory}>
                                             <h4>Serums</h4>
                                             <ul>
-                                            <li className={styles.viewall}><Link href="/item3">View all Serums</Link></li>
+                                            <li className={styles.viewall}><Link href="/products">View all Serums</Link></li>
                                             <li><Link href = "">Serum 1</Link></li>
                                             <li><Link href = "">Serum 2</Link></li>
                                             <li><Link href = "">Serum 3</Link></li>
@@ -107,7 +107,7 @@ const Header = () => {
                                         <div className={styles.subcategory}>
                                             <h4>Toner</h4>
                                             <ul>
-                                            <li className={styles.viewall}><Link href="/item4">View all Toners</Link></li>
+                                            <li className={styles.viewall}><Link href="/products">View all Toners</Link></li>
                                             <li><Link href = "">Toner 1</Link></li>
                                             <li><Link href = "">Toner 2</Link></li>
                                             <li><Link href = "">Toner 3</Link></li>
@@ -119,7 +119,7 @@ const Header = () => {
                                         <div className={styles.subcategory}>
                                             <h4>SPF</h4>
                                             <ul>
-                                            <li className={styles.viewall}><Link href="/item5">View all SPF</Link></li>
+                                            <li className={styles.viewall}><Link href="/products">View all SPF</Link></li>
                                             <li><Link href = "">SDF 1</Link></li>
                                             <li><Link href = "">SDF 2</Link></li>
                                             <li><Link href = "">SDF 3</Link></li>
@@ -152,7 +152,7 @@ const Header = () => {
                 </div>  
 
 
-                <Link href="/cart">
+                <Link href="/basket">
                   <button className={styles.iconButton}>
                   <IconCart className={styles.iconCart}/>
                    </button>

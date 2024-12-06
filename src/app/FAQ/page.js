@@ -3,8 +3,12 @@
 import React from "react";
 import styles from "./faq.module.css";
 
+import Header from '../components/header/header'
+import Footer from '../components/footer'
+
 const FAQ = () => {
   return (
+    
     <main className={styles.faqContainer}>
       {/* Page Title */}
       <h1 className={styles.faqTitle}>FAQ</h1>

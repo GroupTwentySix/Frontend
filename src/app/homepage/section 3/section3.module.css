@@ -11,7 +11,7 @@
     background-color: #E3E7E0;
     padding: 0px;
     width: 50%;
-    max-width: 640px;
+   
     display: flex;
 }
 
@@ -19,7 +19,7 @@
     padding: 50px;
     padding-top: 70px;
     width: 50%;
-    max-width: 640px;
+    
     flex: 1;
     background-color: #F8FBF6;
     display: flex;

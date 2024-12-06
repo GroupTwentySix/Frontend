@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function Section4() {
   const categories = [
-    { id: 1, name: "Shop All", image: "images/section1image.jpg", link: "/shop-all" },
-    { id: 2, name: "Cleansers", image: "images/section1image.jpg", link: "/cleansers" },
-    { id: 3, name: "Toners", image: "images/section1image.jpg", link: "/toners" },
-    { id: 4, name: "SPF", image: "images/section1image.jpg", link: "/spf" },
-    { id: 5, name: "Moisturisers", image: "images/section1image.jpg", link: "/moisturisers" },
-    { id: 6, name: "Serums", image: "images/section1image.jpg", link: "/serums" },
+    { id: 1, name: "Shop All", image: "images/section1image.jpg", link: "/products" },
+    { id: 2, name: "Cleansers", image: "images/section1image.jpg", link: "/products" },
+    { id: 3, name: "Toners", image: "images/section1image.jpg", link: "/products" },
+    { id: 4, name: "SPF", image: "images/section1image.jpg", link: "/products" },
+    { id: 5, name: "Moisturisers", image: "images/section1image.jpg", link: "/products" },
+    { id: 6, name: "Serums", image: "images/section1image.jpg", link: "/products" },
   ];
 
   const [position, setPosition] = useState(0);

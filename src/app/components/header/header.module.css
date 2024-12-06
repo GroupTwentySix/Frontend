@@ -1,3 +1,5 @@
+/* 1 */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -5,14 +7,20 @@
     background-color: white;
     padding: 20px 50px 20px;
     position: relative;
-    border-bottom:15px solid #FCF4F4;;
+    border-bottom:15px solid #FCF4F4;
     z-index: 10;
 }
+
+
+
+
 
 .logo {
     height: 40px;
     cursor: pointer;
 }
+
+
 
 /* new starting here*/
 

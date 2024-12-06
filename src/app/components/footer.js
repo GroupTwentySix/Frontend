@@ -64,23 +64,23 @@ export default function Footer() {
         <div className={styles.footerLinks}>
           <div className={styles.column}>
             <h4>Shop</h4>
-            <Link href="#">All</Link>
-            <Link href="#">Cleansers</Link>
-            <Link href="#">Toners</Link>
-            <Link href="#">SPF</Link>
-            <Link href="#">Serums</Link>
-            <Link href="#">Moisturisers</Link>
+            <Link href="/products">All</Link>
+            <Link href="/products">Cleansers</Link>
+            <Link href="/products">Toners</Link>
+            <Link href="/products">SPF</Link>
+            <Link href="/products">Serums</Link>
+            <Link href="/products">Moisturisers</Link>
           </div>
           <div className={styles.column}>
             <h4>Customer Service</h4>
-            <Link href="#">Contact us</Link>
-            <Link href="#">Help & FAQ</Link>
+            <Link href="contact">Contact us</Link>
+            <Link href="FAQ">Help & FAQ</Link>
             <Link href="#">Returns</Link>
           </div>
           <div className={styles.column}>
             <h4>About</h4>
-            <Link href="#">About us</Link>
-            <Link href="#">Mission statement</Link>
+            <Link href="aboutUs">About us</Link>
+            <Link href="aboutUs">Mission statement</Link>
           </div>
         </div>
 
