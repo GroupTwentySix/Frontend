@@ -7,6 +7,7 @@ import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
 import Search from './Search';
+import Image from 'next/image';
 
 export default function Navigation() {
   const { isAuthenticated, username, logout } = useAuth();
@@ -35,9 +36,13 @@ export default function Navigation() {
           {/* Logo - removed border */}
           <Link 
             href="/" 
-            className="text-lg font-medium hover:text-primary transition-colors px-3 py-2 rounded-md"
           >
-            Vitality
+            <Image 
+              src="/vitality-logo.png" 
+              alt="Vitality Logo" 
+              width={80} 
+              height={50} 
+            />
           </Link>
 
           {/* Desktop Navigation */}
