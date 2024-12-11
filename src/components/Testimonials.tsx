@@ -1,108 +1,228 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { type FC, useState, useEffect } from 'react';
 
 const testimonials = [
   {
-    title: "Great Range of products!",
-    content: "Great affordable skincare. Highly recommend as it made me feel rejuvenated and simply utterly",
-    author: "By Emma"
+    title: "Great Range of Products!",
+    content: "Great affordable skincare. Highly recommend as it made me feel rejuvenated and simply amazing.",
+    author: "Emma",
+    role: "Verified Customer"
   },
   {
-    title: "Great Range of products!",
-    content: "Great affordable skincare. Highly recommend as it made me feel rejuvenated and simply utterly",
-    author: "By Emma"
+    title: "Amazing Results!",
+    content: "I've noticed such a difference in my skin since using these products. They're gentle yet effective.",
+    author: "Sarah",
+    role: "Verified Customer"
   },
   {
-    title: "Great Range of products!",
-    content: "Great affordable skincare. Highly recommend as it made me feel rejuvenated and simply utterly",
-    author: "By Emma"
+    title: "Love the Natural Ingredients",
+    content: "Finally found skincare that's both natural and effective. My sensitive skin has never been happier.",
+    author: "Michael",
+    role: "Verified Customer"
+  },
+  {
+    title: "Perfect for Sensitive Skin",
+    content: "These products have transformed my skincare routine. So gentle and effective!",
+    author: "Lisa",
+    role: "Verified Customer"
+  },
+  {
+    title: "Outstanding Quality",
+    content: "The attention to detail and quality of ingredients really shows in the results.",
+    author: "James",
+    role: "Verified Customer"
+  },
+  {
+    title: "Best Natural Products",
+    content: "Love how these products make my skin feel. Natural beauty at its finest!",
+    author: "Rachel",
+    role: "Verified Customer"
   }
 ];
 
+const cardStyle = {
+  flex: '1 0 calc(33.333% - 1rem)',
+  minWidth: '300px',
+  height: '320px',
+  padding: '1.5rem',
+  borderRadius: '1rem',
+  backgroundColor: 'hsl(var(--muted) / 0.5)',
+  border: '1px solid hsl(var(--border))',
+  transition: 'all 0.3s ease',
+  overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column' as const,
+};
+
+const contentStyle = {
+  display: 'flex',
+  flexDirection: 'column' as const,
+  gap: '1rem',
+  height: '100%',
+};
+
+const quoteStyle = {
+  flex: '0 0 auto',
+  color: 'hsl(var(--primary) / 0.6)',
+};
+
+const textContainerStyle = {
+  flex: '1 1 auto',
+  overflow: 'hidden',
+};
+
+const footerStyle = {
+  flex: '0 0 auto',
+  paddingTop: '1rem',
+  borderTop: '1px solid hsl(var(--border))',
+  marginTop: 'auto',
+};
+
+const carouselContainerStyle = {
+  position: 'relative' as const,
+  width: '100%',
+  overflow: 'hidden',
+  WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+  maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+};
+
+const carouselStyle = {
+  display: 'flex',
+  transition: 'transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)',
+  gap: '1.5rem',
+};
+
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Continuous animation
+  // Auto-advance the carousel
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % testimonials.length);
-    }, 5000);
+    const timer = setInterval(() => {
+      setCurrentIndex((current) => 
+        current === testimonials.length - 3 ? 0 : current + 1
+      );
+    }, 5000); // Change slides every 5 seconds
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <section className="py-24 overflow-hidden">
+    <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl font-light text-center mb-16">
-          What people say about us
-        </h2>
+        <div className="text-center space-y-4 mb-12">
+          <h2 className="text-3xl md:text-4xl font-light">What our customers say</h2>
+          <p className="text-muted-foreground">Real experiences from real customers</p>
+        </div>
 
-        <div className="relative">
-          {/* Testimonial Cards */}
+        <div style={carouselContainerStyle}>
           <div 
-            className="flex gap-6 transition-transform duration-500 ease-in-out"
-            style={{ transform: `translateX(-${activeIndex * 33.33}%)` }}
+            style={{
+              ...carouselStyle,
+              transform: `translateX(-${currentIndex * (100 / 3)}%)`,
+            }}
           >
-            {[...testimonials, ...testimonials].map((testimonial, index) => (
+            {testimonials.map((testimonial, index) => (
               <div
-                key={index}
-                className="min-w-[calc(33.33%-1rem)] bg-muted/50 rounded-3xl p-8 space-y-4 border border-foreground/5"
+                key={testimonial.author}
+                style={{
+                  ...cardStyle,
+                  flex: '0 0 calc(33.333% - 1rem)',
+                }}
               >
-                <h3 className="text-xl font-medium">
-                  {testimonial.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {testimonial.content}
-                </p>
-                <p className="text-sm text-foreground/60">
-                  {testimonial.author}
-                </p>
+                <div style={contentStyle}>
+                  <div style={quoteStyle}>
+                    <svg
+                      style={{ height: '2rem', width: '2rem' }}
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                    </svg>
+                  </div>
+
+                  <div style={textContainerStyle}>
+                    <h3 style={{ 
+                      fontSize: '1.125rem', 
+                      fontWeight: 500, 
+                      marginBottom: '0.5rem',
+                      color: 'var(--foreground)'
+                    }}>
+                      {testimonial.title}
+                    </h3>
+                    <p style={{ 
+                      color: 'hsl(var(--muted-foreground))',
+                      display: '-webkit-box',
+                      WebkitLineClamp: '4',
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                      lineHeight: '1.5'
+                    }}>
+                      {testimonial.content}
+                    </p>
+                  </div>
+
+                  <div style={footerStyle}>
+                    <div style={{ 
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}>
+                      <div>
+                        <p style={{ fontWeight: 500 }}>{testimonial.author}</p>
+                        <p style={{ 
+                          fontSize: '0.875rem', 
+                          color: 'hsl(var(--muted-foreground))'
+                        }}>
+                          {testimonial.role}
+                        </p>
+                      </div>
+                      <div style={{ display: 'flex', color: 'hsl(var(--primary))' }}>
+                        {[...Array(5)].map((_, i) => (
+                          <svg
+                            key={i}
+                            style={{ width: '1rem', height: '1rem' }}
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
+        </div>
 
-          {/* Navigation Dots */}
-          <div className="flex justify-center items-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                style={{ width: index === activeIndex ? '24px' : '8px' }}
-                className={`h-2 rounded-full transition-all duration-300 border border-foreground ${
-                  index === activeIndex 
-                    ? 'bg-foreground' 
-                    : 'bg-foreground/20'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={() => setActiveIndex((current) => 
-              current === 0 ? testimonials.length - 1 : current - 1
-            )}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-colors border border-foreground/5"
-            aria-label="Previous testimonial"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={() => setActiveIndex((current) => 
-              (current + 1) % testimonials.length
-            )}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 backdrop-blur-sm p-2 rounded-full hover:bg-background transition-colors border border-foreground/5"
-            aria-label="Next testimonial"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+        {/* Add navigation dots */}
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '0.5rem',
+          marginTop: '2rem' 
+        }}>
+          {Array.from({ length: testimonials.length - 2 }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              style={{
+                width: '0.75rem',
+                height: '0.75rem',
+                borderRadius: '50%',
+                backgroundColor: currentIndex === index 
+                  ? 'hsl(var(--primary))' 
+                  : 'hsl(var(--muted))',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                transition: 'background-color 0.3s ease',
+              }}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

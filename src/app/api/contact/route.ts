@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   try {
     const data = await request.json();
     
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
+    const response = await fetch('http://localhost:7000/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

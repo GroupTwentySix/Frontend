@@ -119,7 +119,7 @@ export default function Products() {
     <div className="min-h-screen py-12">
       {/* Filters Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-foreground/5">
           {/* Mobile filter button */}
           <button
             className="md:hidden flex items-center gap-2 text-sm"
@@ -134,11 +134,15 @@ export default function Products() {
             ${showFilters ? 'block' : 'hidden md:flex'}`}>
             {/* Categories */}
             <div className="space-y-2">
-              <label className="text-sm text-muted-foreground">Category</label>
+              <label className="text-xs text-muted-foreground font-medium">
+                Category
+              </label>
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full md:w-auto px-3 py-2 bg-background border border-foreground/10 rounded-lg focus:outline-none focus:border-foreground/20"
+                className="w-full md:w-auto px-3 py-1.5 bg-background border border-foreground/10 rounded-lg 
+                  focus:outline-none focus:border-foreground/20 text-sm text-muted-foreground appearance-none 
+                  cursor-pointer hover:border-foreground/20 transition-colors"
               >
                 <option value="all">All Categories</option>
                 {categories.map((category) => (
@@ -151,11 +155,15 @@ export default function Products() {
 
             {/* Sort */}
             <div className="space-y-2">
-              <label className="text-sm text-muted-foreground">Sort by</label>
+              <label className="text-xs text-muted-foreground font-medium">
+                Sort by
+              </label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full md:w-auto px-3 py-2 bg-background border border-foreground/10 rounded-lg focus:outline-none focus:border-foreground/20"
+                className="w-full md:w-auto px-3 py-1.5 bg-background border border-foreground/10 rounded-lg 
+                  focus:outline-none focus:border-foreground/20 text-sm text-muted-foreground appearance-none 
+                  cursor-pointer hover:border-foreground/20 transition-colors"
               >
                 <option value="featured">Featured</option>
                 <option value="price-asc">Price: Low to High</option>
@@ -165,9 +173,9 @@ export default function Products() {
           </div>
 
           {/* Active filters summary */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2 text-sm">
             <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">
+            <span className="text-muted-foreground">
               {selectedCategory === 'all' ? 'All Categories' : 
                 categories.find(c => c.id === selectedCategory)?.name}
               {sortBy !== 'featured' && ` • ${
@@ -185,7 +193,7 @@ export default function Products() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 p-4">
             {isLoading ? (
               <div className="col-span-full text-center">Loading products...</div>
             ) : error ? (

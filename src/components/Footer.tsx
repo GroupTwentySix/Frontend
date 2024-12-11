@@ -7,12 +7,35 @@ import { Mail, Instagram, Facebook, Twitter } from 'lucide-react';
 export default function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [email, setEmail] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle subscription logic here (not fully done)
-    setEmail('');
-    setIsModalOpen(false);
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('http://localhost:7000/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Subscription failed. Please try again.');
+      }
+
+      // Success
+      setEmail('');
+      setIsModalOpen(false);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -110,12 +133,17 @@ export default function Footer() {
                   placeholder="Enter your email"
                   className="w-full px-4 py-2 rounded-full border border-foreground/10 bg-muted/50 focus:outline-none focus:border-foreground/20"
                   required
+                  disabled={isLoading}
                 />
+                {error && (
+                  <p className="text-sm text-red-500">{error}</p>
+                )}
                 <button 
                   type="submit"
-                  className="w-full bg-foreground text-background px-8 py-2 rounded-full hover:opacity-90 transition-opacity"
+                  className="w-full bg-foreground text-background px-8 py-2 rounded-full hover:opacity-90 transition-opacity disabled:opacity-50"
+                  disabled={isLoading}
                 >
-                  Subscribe
+                  {isLoading ? 'Subscribing...' : 'Subscribe'}
                 </button>
               </form>
             </div>

@@ -29,7 +29,7 @@ export default function About() {
   ];
 
   return (
-    <div className="space-y-24">
+    <div className="space-y-12 sm:space-y-24">
       {/* Hero Section */}
       <AnimateOnScroll animation="fadeIn">
         <div className="bg-muted/50 rounded-3xl p-8 md:p-16">
