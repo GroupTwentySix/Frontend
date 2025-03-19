@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 900px;
+}
+
+/* === Welcome Section (Top Left) === */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to left */
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    color: #2E7D32; /* Same green as stat boxes */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.username {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+/* === Last Updated (Align Right) === */
+.last-updated {
+    font-size: 12px;
+    color: gray;
+    text-align: right;
+}
+
+/* === Stats Section === */
+.stats {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stat-box {
+    background: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 30%;
+    border: 1px solid black; /* Adds defined thin black border */
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Stat colors */
+.red { color: red; }
+.orange { color: orange; }
+.green { color: green; }
+
+/* === Chart Section === */
+.chart {
+    margin-top: 20px;
+}
+
+.chart-container {
+    background: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+}
