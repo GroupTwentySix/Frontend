@@ -76,10 +76,60 @@ header h3 {
 }
 
 
+/*search contatiner sect*/
 
 
 .search-container {
     margin-bottom: 10px;
     display: flex;
     gap: 10px;
+}
+
+.search-container input {
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc
+}
+
+.search-container button {
+    background: #d8e6cd;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* table*/
+
+table {
+    background: white ;
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 10px;
+}
+
+th {
+    background: #f0f3eb;
+}
+
+td input[type="radio"] {
+    margin: 0;
+}
+
+.edit {
+    color: green;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.delete {
+    color: red;
+    text-decoration: none;
 }
