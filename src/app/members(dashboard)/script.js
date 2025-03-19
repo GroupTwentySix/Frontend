@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function (){
     //search
 
     document.getElementById("searchInput").addEventListener("input", function() {
-        let filter = this.ariaValueMax.toLowerCase();
+        let filter = this.value.toLowerCase();
         let rows = document.querySelectorAll("#memberTable tr");
 
         rows.forEach(row => {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function (){
             if (name.includes(filter) || email.includes(filter)) {
                 row.style.display = "";
             }else {
-                row.style.display = "";
+                row.style.display = "none";
             }
         });
     });
@@ -42,6 +42,18 @@ document.addEventListener("DOMContentLoaded", function (){
         });
 
         row.querySelector(".save").addEventListener("click", function () {
+            let editables = row.querySelectorAll(".editable");
+
+            editables.forEach(cell => {
+                let input = cell.querySelector("input");
+                cell.textContent = input.value;
+            });
+
+            this.style.display = "none";
+            row.querySelector(".edit").style.display = "inline";
+        });
+
+        row.querySelector(".delete").addEventListener("click", function () {
             let confirmDelete = confirm("Are you sure that you want to permenantly delete this member?");
             if (confirmDelete) {
                 row.remove();
@@ -60,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function (){
 
 
     // add members
-    
+
 
 
 
