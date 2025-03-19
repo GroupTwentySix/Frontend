@@ -73,18 +73,34 @@ document.addEventListener("DOMContentLoaded", function (){
 
     // add members
 
+    document.getElementById("addMemberBtn").addEventListener("click", function () {
+        let name = prompt("Please enter member Name:");
+        let email = prompt("Please enter Email:");
+        let password = prompt("Please enter Password:");
+        let dateJoined = new Date().toLocaleDateString("en-Gb");
 
+        if (name && email && password) {
+            let table = document.getElementById("memberTable");
 
+            let newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td><input type="radio" name="select"></td>
+                <td class="editable">${name}</td>
+                <td class="editable">${email}</td>
+                <td class="editable">##########</td>
+                <td>${dateJoined}</td>
+                <td>
+                    <button class="edit">Edit</button>
+                    <button class="save" style="display: none;">Save</button>
+                    <button class="delete">Delete</button>
+                </td>
+            `;
 
+           table.appendChild(newRow);
+           addEditSaveFunctionality(newRow);
 
-
-
-
-
-
-
-
-
-
-
+        } else {
+            alert("All fields are required");
+        }
+    });
 });
