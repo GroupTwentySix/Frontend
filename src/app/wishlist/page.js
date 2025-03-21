@@ -2,87 +2,205 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './wishlist.module.css';
-import Link from 'next/Link';
-import Header from '../components/header/header'
-import Footer from '../components/footer'
+import Header from '../components/header/header';
+import Footer from '../components/footer';
 
+const API_URL = 'http://localhost:7000';
 
 export default function Wishlist() {
-  
-  const [wishlist, setWishlist] = useState([
-    { id: 1, name: "Glow and Restore", description: "Hyaluronic Serum", price: "£23", quantity: 1 },
-    { id: 2, name: "Hydrate and Nourish", description: "Moisturizing Cream", price: "£19", quantity: 1 },
-    { id: 3, name: "Smooth and Shine", description: "Shampoo", price: "£15", quantity: 1 }
-  ]);
+    const [wishlistItems, setWishlistItems] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  // Backend to integrate wishlist API with databaase. this is just for showcase
-  
-  const updateQuantity = (id, action) => {
-    setWishlist((prevWishlist) => 
-      prevWishlist.map(item => 
-        item.id === id ? { ...item, quantity: action === 'increase' ? item.quantity + 1 : Math.max(1, item.quantity - 1) } : item
-      )
+    useEffect(() => {
+        fetchWishlistItems();
+    }, []);
+
+    const fetchWishlistItems = async () => {
+        try {
+            const token = localStorage.getItem('jwt_token');
+            const username = localStorage.getItem('username');
+
+            if (!token || !username) {
+                throw new Error('Please sign in to view your wishlist');
+            }
+
+            const response = await fetch(`${API_URL}/wishlist/${username}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch wishlist items');
+            }
+
+            const data = await response.json();
+            setWishlistItems(data);
+
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const updateQuantity = async (productId, currentQuantity, increment) => {
+        try {
+            if (currentQuantity + increment < 1) return;
+
+            const token = localStorage.getItem('jwt_token');
+            const username = localStorage.getItem('username');
+            const newQuantity = currentQuantity + increment;
+
+            const response = await fetch(`${API_URL}/wishlist/${username}/${productId}?quantity=${newQuantity}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update quantity');
+            }
+
+            // Refresh wishlist after updating quantity
+            fetchWishlistItems();
+
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    const removeFromWishlist = async (productId) => {
+        try {
+            const token = localStorage.getItem('jwt_token');
+            const username = localStorage.getItem('username');
+
+            const response = await fetch(`${API_URL}/wishlist/${username}/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to remove item from wishlist');
+            }
+
+            // Refresh wishlist after removing item
+            fetchWishlistItems();
+            alert('Item removed from wishlist');
+
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    const addToBasket = async (productId, quantity) => {
+        try {
+            const token = localStorage.getItem('jwt_token');
+            const username = localStorage.getItem('username');
+
+            const response = await fetch(`${API_URL}/basket/${username}/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add item to basket');
+            }
+
+            alert('Item added to basket');
+
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    if (isLoading) {
+        return (
+            <>
+                <Header />
+                <div className={styles.loadingContainer}>
+                    <p>Loading wishlist...</p>
+                </div>
+                <Footer />
+            </>
+        );
+    }
+
+    if (error) {
+        return (
+            <>
+                <Header />
+                <div className={styles.errorContainer}>
+                    <p>{error}</p>
+                </div>
+                <Footer />
+            </>
+        );
+    }
+
+    return (
+        <>
+            <Header />
+            <main className={styles.main}>
+                <h1 className={styles.title}>Your Wishlist</h1>
+                {wishlistItems.length === 0 ? (
+                    <p className={styles.emptyWishlist}>Your wishlist is empty</p>
+                ) : (
+                    <div className={styles.wishlistGrid}>
+                        {wishlistItems.map((item) => (
+                            <div key={item._id} className={styles.wishlistItem}>
+                                <img 
+                                    src={item.imageUrl} 
+                                    alt={item.name} 
+                                    className={styles.productImage}
+                                />
+                                <div className={styles.itemDetails}>
+                                    <h3>{item.name}</h3>
+                                    <p className={styles.price}>£{item.price.toFixed(2)}</p>
+                                    <div className={styles.quantityControl}>
+                                        <button 
+                                            onClick={() => updateQuantity(item._id, Number(item.quantity) || 1, -1)}
+                                            className={styles.quantityButton}
+                                        >
+                                            -
+                                        </button>
+                                        <span className={styles.quantity}>
+                                            {Number(item.quantity) || 1}
+                                        </span>
+                                        <button 
+                                            onClick={() => updateQuantity(item._id, Number(item.quantity) || 1, 1)}
+                                            className={styles.quantityButton}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                    <div className={styles.buttonGroup}>
+                                        <button 
+                                            onClick={() => addToBasket(item._id)}
+                                            className={styles.addToBasketButton}
+                                        >
+                                            Add to Basket
+                                        </button>
+                                        <button 
+                                            onClick={() => removeFromWishlist(item._id)}
+                                            className={styles.removeButton}
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </main>
+            <Footer />
+        </>
     );
-  };
-
-  
-  const removeItem = (id) => {
-    setWishlist(prevWishlist => prevWishlist.filter(item => item.id !== id));
-  };
-
-  
-  const moveToBasket = (id) => {
-    console.log(`Item with id ${id} moved to basket.`);
-    removeItem(id); // fake removal for now. backend to itegrate wishlist and move to basket feature
-  };
-
-  return (
-    <>
-        <Header />
-    <main className={styles.wishlistMain}>
-      <h1 className={styles.wishlistHeader}>Wishlist ({wishlist.length})</h1>
-
-      {wishlist.map((item) => (
-        <div key={item.id} className={styles.wishlistItem}>
-          <div className={styles.wishlistImage}></div>
-          <div className={styles.wishlistDetails}>
-            <h3 style={{ color: "#CEA5A7" }}>{item.name}</h3>
-            <p>{item.description}</p>
-            <p>{item.price}</p>
-          </div>
-
-          <div className={styles.wishlistActions}>
-            <div className={styles.quantityContainer}>
-              <button className={styles.decrease} onClick={() => updateQuantity(item.id, 'decrease')}>-</button>
-              <span className={styles.quantity}>{item.quantity}</span>
-              <button className={styles.increase} onClick={() => updateQuantity(item.id, 'increase')}>+</button>
-            </div>
-
-            {/* <div className={styles.actionButtons}>
-              <button onClick={() => moveToBasket(item.id)}>Move to Basket</button>
-            </div>
-
-            <div className={styles.actionButtons}>
-              <button style={{ backgroundColor: 'white' }} onClick={() => removeItem(item.id)}>Remove</button>
-            </div>
-            */}
-
-            <div className={styles.actionButtons}> 
-                <button className={styles.wishlistButton1} onClick={() => moveToBasket(item.id)}>Move to Basket</button>
-            </div>
-
-            <div className={styles.actionButtons}> 
-                <button className={styles.wishlistButton2} onClick={() => removeItem(item.id)}>Remove</button>
-            </div>
-
-
-
-
-          </div>
-        </div>
-      ))}
-    </main>
-    <Footer />
-    </>
-  );
 }

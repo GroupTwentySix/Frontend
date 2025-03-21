@@ -1,19 +1,28 @@
 "use client";
 
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useState } from 'react'
 import styles from './header.module.css'
 import IconCart from './iconCart'
 import IconSearch from './iconSearch'
 import IconWishlist from './iconWishlist'
 import IconProfile from './iconProfile'
 
-
-
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownHovered, setIsDropdownHovered] = useState(false);
     let closeTimer;
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        const token = localStorage.getItem('jwt_token');
+        const storedUsername = localStorage.getItem('username');
+        if (token && storedUsername) {
+            setIsLoggedIn(true);
+            setUsername(storedUsername);
+        }
+    }, []);
 
     const handleMouseEnter = () => {
         clearTimeout(closeTimer);
@@ -33,13 +42,19 @@ const Header = () => {
         setIsDropdownHovered(true);
     };
 
-
-
     const handleDropdownMouseLeave = () => {
         setIsDropdownHovered(false);
         closeTimer = setTimeout(() => {
             setIsOpen(false);
         }, 500);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('jwt_token');
+        localStorage.removeItem('username');
+        setIsLoggedIn(false);
+        setUsername('');
+        window.location.reload();
     };
 
     return (
@@ -151,24 +166,34 @@ const Header = () => {
                     <IconSearch className={styles.iconSearch} />
                 </div>  
 
-
                 <Link href="/basket">
-                  <button className={styles.iconButton}>
-                  <IconCart className={styles.iconCart}/>
-                   </button>
+                    <button className={styles.iconButton}>
+                        <IconCart className={styles.iconCart}/>
+                    </button>
                 </Link>
 
                 <Link href="/wishlist">
-                  <button className={styles.iconButton}>
-                  <IconWishlist className={styles.iconWishlist}/>
-                   </button>
+                    <button className={styles.iconButton}>
+                        <IconWishlist className={styles.iconWishlist}/>
+                    </button>
                 </Link>
 
-                <Link href="/signIn">
-                  <button className={styles.iconButton}>
-                  <IconProfile className={styles.iconProfile}/>
-                   </button>
-                </Link>
+                {isLoggedIn ? (
+                    <div className={styles.userSection}>
+                        <span className={styles.username}>
+                            Logged in as: {username}
+                        </span>
+                        <button onClick={handleLogout} className={styles.logoutButton}>
+                            Logout
+                        </button>
+                    </div>
+                ) : (
+                    <Link href="/signIn">
+                        <button className={styles.iconButton}>
+                            <IconProfile className={styles.iconProfile}/>
+                        </button>
+                    </Link>
+                )}
 
             </div>
 

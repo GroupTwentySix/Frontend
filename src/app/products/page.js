@@ -1,97 +1,263 @@
 "use client"; 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./products.module.css";
 import Header from "../components/header/header";
-import Footer from '../components/footer'
+import Footer from '../components/footer';
 
-// Example product data from the database
-const productData = [
-  { id: 1, name: "Glow and restore", description: "Hyaluronic Serum", price: 23, image: "/images/section1image.jpg" },
-  { id: 2, name: "Hydrate Boost", description: "Moisturizer", price: 18, image: "/images/faceImage1.jpg" },
-  { id: 3, name: "Renew Cleanser", description: "Gentle Face Wash", price: 20, image: "/images/section3image.jpg" },
-  { id: 4, name: "Daily SPF", description: "Sunscreen SPF 50", price: 25, image: "/images/step1.jpeg" },
-  { id: 5, name: "Toner Refresh", description: "Balancing Toner", price: 15, image: "/images/step2.jpeg" },
-  { id: 6, name: "Repair Serum", description: "Vitamin C Serum", price: 30, image: "/images/step3.jpeg" },
+const API_URL = 'http://localhost:7000';
+
+// Define categories - you can expand this later
+const CATEGORIES = [
+    { id: 'all', name: 'All Products' },
+    { id: 'moisturiser', name: 'Moisturisers' },
+    { id: 'cleanser', name: 'Cleansers' },
+    { id: 'serum', name: 'Serums' },
+    { id: 'toner', name: 'Toners' },
+    { id: 'spf', name: 'SPF' }
 ];
 
-
+const SORT_OPTIONS = [
+    { id: 'default', name: 'Default' },
+    { id: 'priceLowToHigh', name: 'Price: Low to High' },
+    { id: 'priceHighToLow', name: 'Price: High to Low' },
+    { id: 'nameAZ', name: 'Name: A to Z' },
+    { id: 'nameZA', name: 'Name: Z to A' }
+];
 
 export default function Products() {
-  const [products, setProducts] = useState(productData); // State to manage product list
-  const [sortOrder, setSortOrder] = useState(null); // State to track sort order
+    const [products, setProducts] = useState([]);
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [sortOption, setSortOption] = useState('default');
+    const [showSortMenu, setShowSortMenu] = useState(false);
 
-  const sortProducts = (order) => {
-    const sorted = [...products].sort((a, b) => {
-      if (order === "low-to-high") return a.price - b.price;
-      if (order === "high-to-low") return b.price - a.price;
-      return 0;
-    });
-    setProducts(sorted);
-    setSortOrder(order);
-  };
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
-  return (
-    <div className={styles.productsPage}>
-      {/* Header Component */}
-      <Header />
+    const fetchProducts = async () => {
+        try {
+            const token = localStorage.getItem('jwt_token');
+            const response = await fetch(`${API_URL}/products`, {
+                headers: token ? {
+                    'Authorization': `Bearer ${token}`
+                } : {}
+            });
 
-      <div className={styles.container}>
-        
+            if (!response.ok) {
+                throw new Error('Failed to fetch products');
+            }
 
-        {/* Categories */}
-        <div className={styles.categories}>
-          <button className={`${styles.categoryBtn} ${styles.active}`}>All</button>
-          <button className={styles.categoryBtn}>Serums</button>
-          <button className={styles.categoryBtn}>Moisturisers</button>
-          <button className={styles.categoryBtn} >Cleanser</button>
-          <button className={styles.categoryBtn}>Toner</button>
-          <button className={styles.categoryBtn}>SPF</button>
-        </div>
+            const data = await response.json();
+            setProducts(data);
+        } catch (error) {
+            console.error('Error:', error);
+            setError('Failed to load products');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-        {/* Sort Button */}
-        <div className={styles.sortContainer}>
-          <div className={styles.dropdown}>
-            <button className={styles.sortBtn}>Sort</button>
-            <div className={styles.dropdownMenu}>
-              <button
-                className={`${styles.dropdownItem} ${sortOrder === "low-to-high" ? styles.active : ""}`}
-                onClick={() => sortProducts("low-to-high")}
-              >
-                Low to High
-              </button>
-              <button
-                className={`${styles.dropdownItem} ${sortOrder === "high-to-low" ? styles.active : ""}`}
-                onClick={() => sortProducts("high-to-low")}
-              >
-                High to Low
-              </button>
-            </div>
-          </div>
-        </div>
+    // Filter and sort products
+    const getFilteredAndSortedProducts = () => {
+        let filteredProducts = [...products];
 
-        {/* Products Grid */}
-        <div className={styles.productsGrid}>
-          {products.map((product) => (
-          <div key={product.id} className={styles.productCard}>
-             <img
-                src={product.image}
-                alt={product.name}
-                className={styles.productImage}
-              />
+        // Filter by category
+        if (selectedCategory !== 'all') {
+            filteredProducts = filteredProducts.filter(product => 
+                product.category === selectedCategory
+            );
+        }
 
-            <h2 className={styles.productTitle}>{product.name}</h2>
-            <p className={styles.productDescription}>{product.description}</p>
-            <p className={styles.productPrice}>£{product.price}</p>
-            <button className={styles.addToBagBtn}>Add to bag</button>
-          </div>
-        ))}
-        </div>
+        // Sort products
+        switch (sortOption) {
+            case 'priceLowToHigh':
+                filteredProducts.sort((a, b) => a.price - b.price);
+                break;
+            case 'priceHighToLow':
+                filteredProducts.sort((a, b) => b.price - a.price);
+                break;
+            case 'nameAZ':
+                filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'nameZA':
+                filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                break;
+            default:
+                // Default sorting (you might want to implement a specific default order)
+                break;
+        }
 
-      </div>
-      {/* Footer Component */}
-<Footer />
-    </div>
-  );
+        return filteredProducts;
+    };
 
-      
+    const addToBasket = async (productId) => {
+        try {
+            const token = localStorage.getItem('jwt_token');
+            const username = localStorage.getItem('username');
+
+            if (!token || !username) {
+                alert('Please sign in to add items to your basket');
+                return;
+            }
+
+            const response = await fetch(`${API_URL}/basket/${username}/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add to basket');
+            }
+
+            alert('Product added to basket successfully');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to add product to basket');
+        }
+    };
+
+    const addToWishlist = async (productId) => {
+        try {
+            const token = localStorage.getItem('jwt_token');
+            const username = localStorage.getItem('username');
+
+            if (!token || !username) {
+                alert('Please sign in to add items to your wishlist');
+                return;
+            }
+
+            const response = await fetch(`${API_URL}/wishlist/${username}/${productId}?quantity=1`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add to wishlist');
+            }
+
+            alert('Product added to wishlist!');
+
+        } catch (error) {
+            alert(error.message);
+        }
+    };
+
+    if (isLoading) {
+        return (
+            <>
+                <Header />
+                <div className={styles.loadingContainer}>
+                    <p>Loading products...</p>
+                </div>
+                <Footer />
+            </>
+        );
+    }
+
+    if (error) {
+        return (
+            <>
+                <Header />
+                <div className={styles.errorContainer}>
+                    <p>{error}</p>
+                </div>
+                <Footer />
+            </>
+        );
+    }
+
+    const filteredAndSortedProducts = getFilteredAndSortedProducts();
+
+    return (
+        <>
+            <Header />
+            <main className={styles.productsPage}>
+                <div className={styles.container}>
+                    <h1 className={styles.header}>Our Products</h1>
+                    
+                    {/* Categories */}
+                    <div className={styles.categories}>
+                        {CATEGORIES.map(category => (
+                            <button
+                                key={category.id}
+                                className={`${styles.categoryBtn} ${
+                                    selectedCategory === category.id ? styles.active : ''
+                                }`}
+                                onClick={() => setSelectedCategory(category.id)}
+                            >
+                                {category.name}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Sort Dropdown */}
+                    <div className={styles.sortContainer}>
+                        <div className={styles.dropdown}>
+                            <button 
+                                className={styles.sortBtn}
+                                onClick={() => setShowSortMenu(!showSortMenu)}
+                            >
+                                Sort By
+                            </button>
+                            {showSortMenu && (
+                                <div className={styles.dropdownMenu}>
+                                    {SORT_OPTIONS.map(option => (
+                                        <div
+                                            key={option.id}
+                                            className={`${styles.dropdownItem} ${
+                                                sortOption === option.id ? styles.active : ''
+                                            }`}
+                                            onClick={() => {
+                                                setSortOption(option.id);
+                                                setShowSortMenu(false);
+                                            }}
+                                        >
+                                            {option.name}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Products Grid */}
+                    <div className={styles.productsGrid}>
+                        {filteredAndSortedProducts.map((product) => (
+                            <div key={product.id} className={styles.productCard}>
+                                <img 
+                                    src={product.imageUrl} 
+                                    alt={product.name} 
+                                    className={styles.productImage}
+                                />
+                                <h3 className={styles.productTitle}>{product.name}</h3>
+                                <p className={styles.description}>{product.description}</p>
+                                <p className={styles.price}>£{product.price.toFixed(2)}</p>
+                                <div className={styles.buttonGroup}>
+                                    <button 
+                                        onClick={() => addToBasket(product.id)}
+                                        className={styles.addToBasketButton}
+                                    >
+                                        Add to Basket
+                                    </button>
+                                    <button 
+                                        onClick={() => addToWishlist(product.id)}
+                                        className={styles.addToWishlistButton}
+                                    >
+                                        Add to Wishlist
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </main>
+            <Footer />
+        </>
+    );
 }

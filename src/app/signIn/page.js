@@ -1,32 +1,39 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import styles from "./signIn.module.css";
 import Link from "next/link"; 
 import Header from '../components/header/header'
 import Footer from '../components/footer'
 
-{/* Copied and pasted Lindsay's code from her folder to avoid conflicted file. */}
-
 export default function SignIn() {
-
-    const [username, setUsername] = useState(""); // Updated to username
+    const router = useRouter();
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(""); // For error messages
-    const [success, setSuccess] = useState(""); // For success messages
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+
+    useEffect(() => {
+        const token = localStorage.getItem('jwt_token');
+        if (token) {
+            // If token exists, redirect to home page
+            router.push('/');
+        }
+    }, [router]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(""); // Clear previous errors
-        setSuccess(""); // Clear previous successes
+        setError("");
+        setSuccess("");
 
         try {
-            const response = await fetch("https://e4cf-134-151-21-61.ngrok-free.app/login", { // Adjust to your backend URL
+            const response = await fetch("http://localhost:7000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ username, password }), // Use username here
+                body: JSON.stringify({ username, password }),
             });
 
             if (!response.ok) {
@@ -35,9 +42,22 @@ export default function SignIn() {
             }
 
             const data = await response.json();
-            setSuccess(`Welcome back, ${data.userName || username}!`);
+            
+            // Store the JWT token and username
+            localStorage.setItem('jwt_token', data.token);
+            localStorage.setItem('username', username);
+            
+            setSuccess(`Welcome back, ${username}!`);
+
+            // Redirect after successful login
+            setTimeout(() => {
+                router.push('/');
+            }, 1500);
+
         } catch (err) {
             setError(err.message);
+            localStorage.removeItem('jwt_token');
+            localStorage.removeItem('username');
         }
     };
 
